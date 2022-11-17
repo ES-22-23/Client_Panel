@@ -2,7 +2,7 @@ import React from 'react';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import {useKeycloak} from "@react-keycloak/web";
-import {Card, Col} from "react-bootstrap";
+import {Card, Col,Button} from "react-bootstrap";
 import {BsEnvelopeFill, BsFillPersonLinesFill} from "react-icons/bs";
 
 const Account = () => {
@@ -21,7 +21,9 @@ const Account = () => {
                         </Col>
                         <Col className="my-3 col-6">
                             <h3><BsEnvelopeFill/> Username</h3>
-                            <h5 className="p-4 mt-4" style={{borderRadius: "20px", backgroundColor: "rgba(0,0,0,0.60)"}}>{keycloak.tokenParsed.preferred_username}</h5>
+                            <h5 className="p-4 mt-4" 
+                            style={{borderRadius: "20px", backgroundColor: "rgba(0,0,0,0.60)"}}>
+                                {keycloak.tokenParsed.preferred_username}</h5>
                         </Col>
                         <Col className="my-3">
                             <h3><BsEnvelopeFill/> Email</h3>
@@ -30,8 +32,13 @@ const Account = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <h6 className="mt-5">Application Client ID</h6>
-                        <p>{keycloak.clientId}</p>
+                        <Col className="my-3 col-6">
+                            <h6 className="mt-5">Application Client ID</h6>
+                            <p>{keycloak.clientId}</p>
+                        </Col> 
+                        <Col className="my-3 col-6"> 
+                            <Button variant="outline-danger" className="mt-5" onClick={() => keycloak.logout()}>Update info {keycloak.tokenParsed.preferred_username}</Button>
+                        </Col>  
                     </Row>
                 </Card>
             </Row>

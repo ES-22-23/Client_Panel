@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import {useKeycloak} from "@react-keycloak/web";
 import {Card, Col,Button} from "react-bootstrap";
 import {BsEnvelopeFill, BsFillPersonLinesFill} from "react-icons/bs";
+import ButtonCard from '../ButtonCard/ButtonCard';
+
+
 
 const Account = () => {
-
     const { keycloak, } = useKeycloak();
-
+    console.log(keycloak)
     return (
         <Container className="text-center justify-content-center d-flex py-5" data-testid="Account">
             <Row className="justify-content-center align-items-center d-flex mt-4 w-75" style={{maxWidth: "600px"}}>
@@ -37,7 +39,7 @@ const Account = () => {
                             <p>{keycloak.clientId}</p>
                         </Col> 
                         <Col className="my-3 col-6"> 
-                            <Button variant="outline-danger" className="mt-5" onClick={() => keycloak.logout()}>Update info {keycloak.tokenParsed.preferred_username}</Button>
+                            <ButtonCard title="Update Info" link="/update" />
                         </Col>  
                     </Row>
                 </Card>

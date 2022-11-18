@@ -42,7 +42,7 @@ ButtonCard.propTypes = {
 
 ButtonCard.defaultProps = {
     title: "Title",
-    description: "Description",
+    description: "",
     link: "/",
     icon: "BsFillHouseDoorFill"
 }

@@ -18,6 +18,7 @@ import PrivateRoute from "./helpers/PrivateRoute";
 import {useKeycloak} from "@react-keycloak/web";
 import {Spinner} from "react-bootstrap";
 import Account from "./components/Account/Account";
+import InfoUpdate from "./components/InfoUpdate/InfoUpdate"
 import OwnerProperties from "./components/OwnerProperties/OwnerProperties";
 
 import {Flip, ToastContainer} from "react-toastify";
@@ -92,6 +93,7 @@ function App() {
                     <Route path="/owners/:username/properties" element={<PrivateRoute><OwnerProperties/></PrivateRoute>}></Route>
                     <Route path="/owners/" element={<PrivateRoute><OwnerProperties/></PrivateRoute>}></Route>
                     <Route path="*" element={<PrivateRoute><Home/></PrivateRoute>}></Route>
+                    <Route path="/update" element={<PrivateRoute><InfoUpdate/></PrivateRoute>}></Route>
                 </Routes>
             </Router>
             {toastContainer}

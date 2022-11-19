@@ -32,7 +32,7 @@ const InfoUpdate = () => {
         else if (email === ""){
             owner.username = keycloak.tokenParsed.email
         }
-        updateOwner(owner)
+        updateOwner(owner )
         //updateOwner(keycloak.tokenParsed.preferred_username, owner)
     };
     const options = {title: "Properties", description: "View his properties", link: "/properties", icon: "BsFillHouseDoorFill"};

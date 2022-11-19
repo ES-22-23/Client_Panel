@@ -5,10 +5,8 @@ import {useKeycloak} from "@react-keycloak/web";
 import {Card, Col,Button} from "react-bootstrap";
 import {BsEnvelopeFill, BsFillPersonLinesFill} from "react-icons/bs";
 import ButtonCard from '../ButtonCard/ButtonCard';
-
-
 import Form from 'react-bootstrap/Form';
-import { getOwner, updateOwner } from '../../utils/ApiHandler';
+import { createOwner, getOwner, updateOwner } from '../../utils/ApiHandler';
 
 const InfoUpdate = () => {
     const { keycloak, } = useKeycloak();
@@ -32,7 +30,8 @@ const InfoUpdate = () => {
         else if (email === ""){
             owner.username = keycloak.tokenParsed.email
         }
-        updateOwner(owner )
+        console.log(owner)
+        updateOwner(keycloak.tokenParsed.name, owner)
         //updateOwner(keycloak.tokenParsed.preferred_username, owner)
     };
     const options = {title: "Properties", description: "View his properties", link: "/properties", icon: "BsFillHouseDoorFill"};

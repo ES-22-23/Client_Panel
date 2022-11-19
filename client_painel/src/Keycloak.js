@@ -6,7 +6,7 @@ import Keycloak from "keycloak-js";
     clientId: "react-client-panel",
 });*/
 const keycloak = new Keycloak({
-    url: "http://localhost:8080/auth",
+    url: "http://localhost:8080/auth", //Connected to local Keycloak server for tests
     realm: "test_realm",
     clientId: "react-client-auth",
 });

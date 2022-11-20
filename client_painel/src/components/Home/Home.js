@@ -4,11 +4,16 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import {Col} from "react-bootstrap";
 import SecComCarousel from "../SecComCarousel/SecComCarousel";
+import {useKeycloak} from "@react-keycloak/web";
+
+
 
 const Home = () => {
+    const { keycloak, } = useKeycloak();
+
 
     const options = [
-        {title: "Properties", description: "View his properties", link: "/properties", icon: "BsFillHouseDoorFill"},
+        {title: "Properties", description: "View his properties", link: "/owners/:username/properties", icon: "BsFillHouseDoorFill"},
         /**{title: "Intrusions", description: "View intrusions", link: "/intrusions", icon: "BsFillPeopleFill"},*/
         {title: "Account", description: "View account details", link: "/account", icon: "BsFillPersonFill"},
     ]

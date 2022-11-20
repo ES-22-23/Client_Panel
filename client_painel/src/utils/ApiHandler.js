@@ -23,7 +23,10 @@ async function createOwner(owner) {
     });
 }
 
+
 async function updateOwner(old_username, owner) {
+    console.log(apiAddress + "/owners")
+    console.log(keycloak.token)
     return await axios.put(apiAddress + "/owners/" + old_username, owner, {
         headers: {'Authorization': 'Bearer ' + keycloak.token}
     });

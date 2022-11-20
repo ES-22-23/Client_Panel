@@ -12,7 +12,7 @@ import { getOwner, updateOwner } from '../../utils/ApiHandler';
 
 const InfoUpdate = () => {
     const { keycloak, } = useKeycloak();
-
+    
     const [name, setName] = React.useState("");
     const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");
@@ -32,7 +32,8 @@ const InfoUpdate = () => {
         else if (email === ""){
             owner.username = keycloak.tokenParsed.email
         }
-        updateOwner(owner)
+        console.log(owner)
+        updateOwner(keycloak.tokenParsed.preferred_username, owner)
         //updateOwner(keycloak.tokenParsed.preferred_username, owner)
     };
     const options = {title: "Properties", description: "View his properties", link: "/properties", icon: "BsFillHouseDoorFill"};

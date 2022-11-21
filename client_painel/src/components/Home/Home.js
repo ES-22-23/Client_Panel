@@ -13,9 +13,9 @@ const Home = () => {
 
 
     const options = [
-        {title: "Properties", description: "View his properties", link: "/owners/:username/properties", icon: "BsFillHouseDoorFill"},
+        {title: "Properties", description: "View his properties", link: "/properties", icon: "BsFillHouseDoorFill"},
         /**{title: "Intrusions", description: "View intrusions", link: "/intrusions", icon: "BsFillPeopleFill"},*/
-        {title: "Account", description: "View account details", link: "/account", icon: "BsFillPersonFill"},
+        //{title: "Account", description: "View account details", link: "/account", icon: "BsFillPersonFill"},
     ]
     let buttons = []
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import keycloak from "../Keycloak";
 
 // const apiAddress = process.env.REACT_APP_API_URL + "/api";
-const apiAddress = "http://management.api.hgsoft.me:8082";
+const apiAddress = "http://scss.hgsoft.me:8082";
 
 // Owner functions
 async function getOwners() {
@@ -26,7 +26,7 @@ async function createOwner(owner) {
 
 async function updateOwner(old_username, owner) {
     console.log(apiAddress + "/owners")
-    console.log(keycloak.token)
+    
     return await axios.put(apiAddress + "/owners/" + old_username, owner, {
         headers: {'Authorization': 'Bearer ' + keycloak.token}
     });

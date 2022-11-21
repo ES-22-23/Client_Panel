@@ -7,17 +7,28 @@ import PropertyCard from "../PropertyCard/PropertyCard";
 import SearchBar from "../SearchBar/SearchBar";
 import {getOwner} from "../../utils/ApiHandler";
 import {useParams} from "react-router-dom";
+import {useKeycloak} from "@react-keycloak/web";
 
 const OwnerProperties = () => {
-
-    const { username } = useParams();
-
+    const { keycloak, initialized} = useKeycloak();
+    
+    const [username, setUsername] = React.useState(undefined);
     const [owner, setOwner] = React.useState(undefined);
     const [allProperties, setAllProperties] = React.useState([]);
     const [properties, setProperties] = React.useState([]);
 
     useEffect(() => {
+        if (initialized){
+            setUsername(keycloak.tokenParsed.preferred_username);
+        }
+    },
+    [keycloak, initialized])
+
+    useEffect(() => {
+        if (username !== undefined){
+        console.log(username)
         getOwner(username).then((response) => {
+            //console.log(response.data)
             setOwner(response.data);
         }).catch((error) => {
             console.log(error);
@@ -25,11 +36,13 @@ const OwnerProperties = () => {
                     {"id": 1, "name": "Property 1", "address": "Address1", "owner": "John",
                         "cameras": [{"id": 1}, {"id": 2}], "alarms": [{"id": 1}, {"id": 2}, {"id": 3}]}
             ]});
-        });
+        });}
     }, [username]);
 
     useEffect(() => {
+        console.log(owner)
         if (owner !== undefined) {
+            console.log("HELLO")
             setAllProperties(owner.properties);
             setProperties(owner.properties);
         }

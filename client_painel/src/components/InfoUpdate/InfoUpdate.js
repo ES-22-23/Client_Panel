@@ -21,7 +21,7 @@ const InfoUpdate = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         //const owner = {"name": name, "username": username, "email": email, "password": password};
-        const owner = {"name": name, "username": username, "email": email, "password": password};
+        const owner = {"name": name, "username": username, "email": email};
 
         if (name === ""){
             owner.name = keycloak.tokenParsed.name
@@ -33,8 +33,8 @@ const InfoUpdate = () => {
             owner.username = keycloak.tokenParsed.email
         }
         console.log(owner)
+        //updateOwner(keycloak.tokenParsed.name, owner)
         updateOwner(keycloak.tokenParsed.preferred_username, owner)
-        //updateOwner(keycloak.tokenParsed.preferred_username, owner)
     };
     const options = {title: "Properties", description: "View his properties", link: "/properties", icon: "BsFillHouseDoorFill"};
     return (
@@ -65,11 +65,6 @@ const InfoUpdate = () => {
                                 </Form.Text>
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
-                            </Form.Group>
-                           
                             <Button variant="primary" type="submit" onClick={handleSubmit.bind(this)}>
                                 Submit
                             </Button>

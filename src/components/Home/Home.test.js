@@ -21,11 +21,9 @@ describe('<Home />', () => {
     button = screen.getByTestId("PropertiesButton");
     expect(button).toBeInTheDocument();
 
-    button = screen.getByTestId("IntrusionsButton");
-    expect(button).toBeInTheDocument();
 
-    button = screen.getByTestId("AccountButton");
-    expect(button).toBeInTheDocument();
+    //button = screen.getByTestId("AccountButton");
+    //expect(button).toBeInTheDocument();
   });
 
 });

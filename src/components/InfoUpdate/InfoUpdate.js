@@ -34,7 +34,14 @@ const InfoUpdate = () => {
         }
         console.log(owner)
         //updateOwner(keycloak.tokenParsed.name, owner)
-        updateOwner(keycloak.tokenParsed.preferred_username, owner)
+        updateOwner(keycloak.tokenParsed.preferred_username, owner).then((response) => {
+            toast.success("Owner updated successfully");
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 2000);
+        }).catch((error) => {
+            toast.error("Error updating owner");
+        });
     };
     const options = {title: "Properties", description: "View his properties", link: "/properties", icon: "BsFillHouseDoorFill"};
     return (
@@ -52,11 +59,7 @@ const InfoUpdate = () => {
                                         onChange={(e) => setName(e.target.value)}/>
                                
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicUsername">
-                                <Form.Label>New Username</Form.Label>
-                                <Form.Control type="text" placeholder="Enter username" onChange={(e) => setUsername(e.target.value)} />
-                               
-                            </Form.Group>
+                          
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Email address</Form.Label>
                                 <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)}/>

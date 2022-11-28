@@ -40,7 +40,7 @@ const Account = () => {
                             <p>{keycloak.clientId}</p>
                         </Col> 
                         <Col className="my-3 col-6"> 
-                            <ButtonCard title="Update Info" link="/update" />
+                            <ButtonCard title="Update Info" link="https://https://auth.hgsoft.me/auth/realms/keycloak-react-auth/account/#/personal-info" />
                         </Col>  
                     </Row>
                 </Card>

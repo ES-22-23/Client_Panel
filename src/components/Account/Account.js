@@ -8,6 +8,7 @@ import ButtonCard from '../ButtonCard/ButtonCard';
 
 
 
+
 const Account = () => {
     const { keycloak, } = useKeycloak();
     console.log(keycloak)
@@ -39,7 +40,7 @@ const Account = () => {
                             <p>{keycloak.clientId}</p>
                         </Col> 
                         <Col className="my-3 col-6"> 
-                            <ButtonCard title="Update Info" link="https://auth.hgsoft.me/auth/realms/keycloak-react-auth/account/#/personal-info" />
+                            <ButtonCard title="Update Info" link="https://https://auth.hgsoft.me/auth/realms/keycloak-react-auth/account/#/personal-info" />
                         </Col>  
                     </Row>
                 </Card>

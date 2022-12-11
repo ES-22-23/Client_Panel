@@ -17,28 +17,6 @@ async function getOwner(ownerId) {
     });
 }
 
-async function createOwner(owner) {
-    return await axios.post(apiAddress + "/owners", owner, {
-        headers: {'Authorization': 'Bearer ' + keycloak.token}
-    });
-}
-
-
-async function updateOwner(old_username, owner) {
-    console.log(apiAddress + "/owners")
-    
-    return await axios.put(apiAddress + "/owners/" + old_username, owner, {
-        headers: {'Authorization': 'Bearer ' + keycloak.token}
-    });
-}
-
-async function deleteOwner(ownerId) {
-    // ownerId == username
-    return await axios.delete(apiAddress + "/owners/" + ownerId, {
-        headers: {'Authorization': 'Bearer ' + keycloak.token}
-    });
-}
-
 
 // Property functions
 async function getProperties() {
@@ -53,24 +31,6 @@ async function getProperty(propertyId) {
     });
 }
 
-async function createProperty(property) {
-    return await axios.post(apiAddress + "/properties", property, {
-        headers: {'Authorization': 'Bearer ' + keycloak.token}
-    });
-}
-
-async function updateProperty(property) {
-    return await axios.put(apiAddress + "/properties/" + property.id, property, {
-        headers: {'Authorization': 'Bearer ' + keycloak.token}
-    });
-}
-
-async function deleteProperty(propertyId) {
-    return await axios.delete(apiAddress + "/properties/" + propertyId, {
-        headers: {'Authorization': 'Bearer ' + keycloak.token}
-    });
-}
-
 
 // Camera functions
 async function getCameras() {
@@ -81,24 +41,6 @@ async function getCameras() {
 
 async function getCamera(cameraId) {
     return await axios.get(apiAddress + "/cameras/" + cameraId, {
-        headers: {'Authorization': 'Bearer ' + keycloak.token}
-    });
-}
-
-async function createCamera(camera) {
-    return await axios.post(apiAddress + "/cameras", camera, {
-        headers: {'Authorization': 'Bearer ' + keycloak.token}
-    });
-}
-
-async function updateCamera(camera) {
-    return await axios.put(apiAddress + "/cameras/" + camera.id, camera, {
-        headers: {'Authorization': 'Bearer ' + keycloak.token}
-    });
-}
-
-async function deleteCamera(cameraId) {
-    return await axios.delete(apiAddress + "/cameras/" + cameraId, {
         headers: {'Authorization': 'Bearer ' + keycloak.token}
     });
 }
@@ -118,20 +60,34 @@ async function getAlarm(alarmId) {
     });
 }
 
-async function createAlarm(alarm) {
-    return await axios.post(apiAddress + "/alarms", alarm, {
+// Event functions
+
+async function getVideos() {
+    return await axios.get(apiAddress + "/events", {
         headers: {'Authorization': 'Bearer ' + keycloak.token}
     });
 }
 
-async function updateAlarm(alarm) {
-    return await axios.put(apiAddress + "/alarms/" + alarm.id, alarm, {
+async function getVideosForOwner(username) {
+    return await axios.get(apiAddress + "/events/owner/" + username, {
         headers: {'Authorization': 'Bearer ' + keycloak.token}
     });
 }
 
-async function deleteAlarm(alarmId) {
-    return await axios.delete(apiAddress + "/alarms/" + alarmId, {
+async function getVideoForProperty(propertyId) {
+    return await axios.get(apiAddress + "/events/property/" + propertyId, {
+        headers: {'Authorization': 'Bearer ' + keycloak.token}
+    });
+}
+
+async function getVideoForCamera(cameraId) {
+    return await axios.get(apiAddress + "/events/camera/" + cameraId, {
+        headers: {'Authorization': 'Bearer ' + keycloak.token}
+    });
+}
+
+async function getVideoFile(videoKey) {
+    return await axios.get(apiAddress + "/events/" + videoKey, {
         headers: {'Authorization': 'Bearer ' + keycloak.token}
     });
 }
@@ -140,22 +96,19 @@ async function deleteAlarm(alarmId) {
 export {
     getOwners,
     getOwner,
-    createOwner,
-    updateOwner,
-    deleteOwner,
+
     getProperties,
     getProperty,
-    createProperty,
-    updateProperty,
-    deleteProperty,
+
     getCameras,
     getCamera,
-    createCamera,
-    updateCamera,
-    deleteCamera,
+ 
     getAlarms,
     getAlarm,
-    createAlarm,
-    updateAlarm,
-    deleteAlarm,
+ 
+    getVideos,
+    getVideosForOwner,
+    getVideoForProperty,
+    getVideoForCamera,
+    getVideoFile
 };

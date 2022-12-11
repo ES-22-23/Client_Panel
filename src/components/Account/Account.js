@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import {useKeycloak} from "@react-keycloak/web";
-import {Card, Col,Button} from "react-bootstrap";
+import {Card, Col} from "react-bootstrap";
 import {BsEnvelopeFill, BsFillPersonLinesFill} from "react-icons/bs";
 import ButtonCard from '../ButtonCard/ButtonCard';
 

@@ -22,6 +22,7 @@ import Account from "./components/Account/Account";
 import OwnerProperties from "./components/OwnerProperties/OwnerProperties";
 
 import {Flip, ToastContainer} from "react-toastify";
+import Dashboard from "./pages/Dashboard";
 
 
 function App() {
@@ -88,7 +89,7 @@ function App() {
             <Router history={customHistory}>
                 <SecComNavbar keycloak={keycloak}/>
                 <Routes>
-                    <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}></Route>
+                    <Route path="/" element={<PrivateRoute><Dashboard/></PrivateRoute>}></Route>
                     <Route path="/account" element={<PrivateRoute><Account/></PrivateRoute>}></Route>
                     <Route path="/properties" element={<PrivateRoute><OwnerProperties/></PrivateRoute>}></Route>
                     <Route path="/intrusions" element={<PrivateRoute><Intrusions/></PrivateRoute>}></Route>

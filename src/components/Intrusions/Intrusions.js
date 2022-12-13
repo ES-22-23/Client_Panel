@@ -1,13 +1,15 @@
 import React, {useEffect} from 'react';
 //import './Intrusions.css';
-import {getVideos} from "../../utils/ApiHandler";
+import {getVideosForOwner} from "../../utils/ApiHandler";
 import Container from "react-bootstrap/Container";
 import IntrusionCard from "../IntrusionCard/IntrusionCard";
 import SearchBar from "../SearchBar/SearchBar";
 import Row from "react-bootstrap/Row";
 import VideoModal from "../VideoModal/VideoModal";
+import {useKeycloak} from "@react-keycloak/web";
 
 const Intrusions = () => {
+    const { keycloak, initialized} = useKeycloak();
 
     const [allIntrusions, setAllIntrusions] = React.useState([]);
     const [intrusions, setIntrusions] = React.useState([]);
@@ -23,9 +25,17 @@ const Intrusions = () => {
 
         return {"key": key, "propertyID": propertyId, "cameraID": cameraId, "intrusionDate": new Date(date).toLocaleString()};
     }
+    const [username, setUsername] = React.useState(undefined);
 
     useEffect(() => {
-        getVideos().then((response) => {
+        if (initialized){
+            setUsername(keycloak.tokenParsed.preferred_username);
+        }
+    },
+    [keycloak, initialized])
+
+    useEffect(() => {
+        getVideosForOwner(username).then((response) => {
 
             const responseIntrusions = response.data;
             const currentIntrusions = [];

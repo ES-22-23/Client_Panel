@@ -1,29 +1,18 @@
 import React, {useEffect} from 'react';
 //import './Intrusions.css';
-import {getVideos, getVideosForOwner} from "../../utils/ApiHandler";
+import {getVideos} from "../../utils/ApiHandler";
 import Container from "react-bootstrap/Container";
 import IntrusionCard from "../IntrusionCard/IntrusionCard";
 import SearchBar from "../SearchBar/SearchBar";
 import Row from "react-bootstrap/Row";
 import VideoModal from "../VideoModal/VideoModal";
-import {useKeycloak} from "@react-keycloak/web";
 
 const Intrusions = () => {
-    const { keycloak, initialized} = useKeycloak();
-    
+
     const [allIntrusions, setAllIntrusions] = React.useState([]);
     const [intrusions, setIntrusions] = React.useState([]);
 
     const [selectedIntrusion, setSelectedIntrusion] = React.useState(null);
-
-    const [username, setUsername] = React.useState(undefined);
-
-    useEffect(() => {
-        if (initialized){
-            setUsername(keycloak.tokenParsed.preferred_username);
-        }
-    },
-    [keycloak, initialized])
 
     const convertKey = (key) => {
         const items = key.split('/');
@@ -36,7 +25,7 @@ const Intrusions = () => {
     }
 
     useEffect(() => {
-        getVideosForOwner(username).then((response) => {
+        getVideos().then((response) => {
 
             const responseIntrusions = response.data;
             const currentIntrusions = [];
@@ -92,6 +81,8 @@ const Intrusions = () => {
     return (
         <Container className="text-center justify-content-center d-flex py-5" data-testid="Intrusions">
             <Row className="w-100">
+                <SearchBar handleSearch={handleSearch.bind(this)}/>
+
                 <Row className="justify-content-start d-flex">
                     {intrusionsPanels}
                 </Row>

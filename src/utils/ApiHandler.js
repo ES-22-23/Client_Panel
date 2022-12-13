@@ -2,7 +2,7 @@ import axios from "axios";
 import keycloak from "../Keycloak";
 
 // const apiAddress = process.env.REACT_APP_API_URL + "/api";
-const apiAddress = "http://smapi.scss.hgsoft.me";
+const apiAddress = "http://smapi.scss.hgsoft.me/";
 
 // Owner functions
 async function getOwners() {
@@ -92,31 +92,23 @@ async function getVideoFile(videoKey) {
     });
 }
 
-async function updateKeyInfo(owner, password){
-    console.log(password)
-    /*axios.post("https://auth.hgsoft.me/auth/realms/keycloak-react-auth/account/#/personal-info", owner,{
-        headers: {'Authorization': 'Bearer ' + keycloak.token}
-    });*/
-    axios.post("http://localhost:8080/auth/realms/test_realm/account/#/personal-info", owner,{
-        headers: {'Authorization': 'Bearer ' + keycloak.token,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json' }
-    });
-}
 
 export {
     getOwners,
     getOwner,
+
     getProperties,
     getProperty,
+
     getCameras,
     getCamera,
+ 
     getAlarms,
-    getAlarm, 
+    getAlarm,
+ 
     getVideos,
     getVideosForOwner,
     getVideoForProperty,
     getVideoForCamera,
-    getVideoFile,
-    updateKeyInfo
+    getVideoFile
 };

@@ -18,6 +18,7 @@ const SecComNavbar = () => {
     }, [location]);
 
     const { keycloak, initialized } = useKeycloak();
+
     if (initialized && !keycloak.authenticated) {
         return (
             <Navbar className="justify-content-center" style={{backgroundColor: "rgba(0,0,0,0.60)"}} expand="lg">
@@ -43,7 +44,7 @@ const SecComNavbar = () => {
                     </Nav>
                 </Navbar.Collapse>
                 <Col className="justify-content-end d-flex">
-                    <Button variant="outline-danger" className="px-3" onClick={() => keycloak.logout()}>Logout {keycloak.tokenParsed.given_name}</Button>
+                    <Button variant="outline-danger" className="px-3" onClick={() => keycloak.logout()}>Logout {keycloak.tokenParsed.preferred_username}</Button>
                 </Col>
             </Container>
         </Navbar>

@@ -9,31 +9,33 @@ import {toast} from "react-toastify";
 
 
 import Form from 'react-bootstrap/Form';
-import { getOwner, updateKeyInfo, updateOwner } from '../../utils/ApiHandler';
+import { getOwner, updateOwner } from '../../utils/ApiHandler';
 
 const InfoUpdate = () => {
     const { keycloak, } = useKeycloak();
     
-    const [Fname, setFName] = React.useState("");
-    const [Lname, setLName] = React.useState("");
+    const [name, setName] = React.useState("");
+    const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
         //const owner = {"name": name, "username": username, "email": email, "password": password};
-        const owner = {"firstName": Fname, "lastName": Lname, "email": email};
+        const owner = {"name": name, "username": username, "email": email};
 
-        if (Fname === ""){
-            owner.Fname = keycloak.tokenParsed.given_name
+        if (name === ""){
+            owner.name = keycloak.tokenParsed.name
         }
-        if (Lname === ""){
-            owner.Lname = keycloak.tokenParsed.family_name
+        else if (username === ""){
+            owner.username = keycloak.tokenParsed.preferred_username
         }
         else if (email === ""){
-            owner.email = keycloak.tokenParsed.email
+            owner.username = keycloak.tokenParsed.email
         }
-        updateKeyInfo(owner, password).then((response) => {
+        console.log(owner)
+        //updateOwner(keycloak.tokenParsed.name, owner)
+        updateOwner(keycloak.tokenParsed.preferred_username, owner).then((response) => {
             toast.success("Owner updated successfully");
             setTimeout(() => {
                 window.location.href = "/";
@@ -51,22 +53,14 @@ const InfoUpdate = () => {
                         <Form >
                             <h2>Update Client Info</h2>
                             <Form.Group className="mb-3" controlId="formBasic">
-                                <Form.Label>First Name</Form.Label>
+                                <Form.Label>New Name</Form.Label>
                                 <Form.Control   
                                         type="text" 
                                         placeholder="Enter username" 
-                                        onChange={(e) => setFName(e.target.value)}/>
+                                        onChange={(e) => setName(e.target.value)}/>
                                
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasic2">
-                                <Form.Label>Last Name</Form.Label>
-                                <Form.Control   
-                                        type="text" 
-                                        placeholder="Enter username" 
-                                        onChange={(e) => setLName(e.target.value)}/>
-                               
-                            </Form.Group>
-                            
+                          
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Email address</Form.Label>
                                 <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)}/>
@@ -74,6 +68,7 @@ const InfoUpdate = () => {
                                 We'll never share your email with anyone else.
                                 </Form.Text>
                             </Form.Group>
+
                             <Button variant="primary" type="submit" onClick={handleSubmit.bind(this)}>
                                 Submit
                             </Button>

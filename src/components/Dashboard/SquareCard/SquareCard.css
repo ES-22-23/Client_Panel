@@ -1,0 +1,16 @@
+.square-card {
+    background-color: white;
+    height: 140px;
+    width: 15vw !important;
+    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+.square-card-last {
+    background-color: white;
+    height: 140px;
+    width: 20% !important;
+    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}

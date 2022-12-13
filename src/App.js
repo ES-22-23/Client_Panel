@@ -34,7 +34,7 @@ function App() {
     if (!initialized) {
         return (
             <Container className="p-0 text-center align-items-center justify-content-center d-flex" style={{
-                backgroundImage: "url(/Background2.jpg)",
+                backgroundImage: "url(./images/Background2.jpg)",
                 backgroundSize: "cover",
                 minHeight: "100vh",
                 minWidth: "100vw"
@@ -81,7 +81,7 @@ function App() {
 
     return (
         <Container className="p-0" style={{
-            backgroundImage: "url(/Background2.jpg)",
+            backgroundColor: "rgb(250, 250, 250)",
             backgroundSize: "cover",
             minHeight: "100vh",
             maxWidth: "100vw"

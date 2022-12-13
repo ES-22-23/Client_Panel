@@ -22,12 +22,6 @@ const Account = () => {
                             <h3><BsFillPersonLinesFill/> Full Name</h3>
                             <h5 className="p-4  mt-4" style={{borderRadius: "20px", backgroundColor: "rgba(0,0,0,0.60)"}}>{keycloak.tokenParsed.name}</h5>
                         </Col>
-                        <Col className="my-3 col-6">
-                            <h3><BsEnvelopeFill/> Username</h3>
-                            <h5 className="p-4 mt-4" 
-                            style={{borderRadius: "20px", backgroundColor: "rgba(0,0,0,0.60)"}}>
-                                {keycloak.tokenParsed.preferred_username}</h5>
-                        </Col>
                         <Col className="my-3">
                             <h3><BsEnvelopeFill/> Email</h3>
                             <h5 className="p-4 mt-4" style={{borderRadius: "20px", backgroundColor: "rgba(0,0,0,0.60)"}}>{keycloak.tokenParsed.email} <span style={{fontSize: "0.8rem", color: "#DC3545"}}>{keycloak.tokenParsed.email_verified ? "Verified" : "Not Verified"}</span>
@@ -40,7 +34,7 @@ const Account = () => {
                             <p>{keycloak.clientId}</p>
                         </Col> 
                         <Col className="my-3 col-6"> 
-                            <ButtonCard title="Update Info" link="https://https://auth.hgsoft.me/auth/realms/keycloak-react-auth/account/#/personal-info" />
+                            <ButtonCard title="Update Info" link="/update" />
                         </Col>  
                     </Row>
                 </Card>

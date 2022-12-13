@@ -69,7 +69,6 @@ const OwnerProperties = () => {
     return (
         <Container className="text-center justify-content-center d-flex py-5" data-testid="OwnerProperties">
             <Row className="w-100">
-                <SearchBar handleSearch={handleSearch.bind(this)} addNew="/new/properties"/>
                 <Row className="justify-content-start d-flex">
                     {propertiesPanels}
                 </Row>

@@ -136,6 +136,13 @@ async function deleteAlarm(alarmId) {
     });
 }
 
+async function updateKeyInfo(owner, password){
+    axios.post("https://auth.hgsoft.me/auth/realms/keycloak-react-auth/account/#/personal-info", owner,{
+        headers: {'Authorization': 'Bearer ' + keycloak.token,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json' }
+    });
+}
 
 export {
     getOwners,
@@ -158,4 +165,5 @@ export {
     createAlarm,
     updateAlarm,
     deleteAlarm,
+    updateKeyInfo
 };

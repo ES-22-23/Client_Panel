@@ -21,7 +21,7 @@ import Account from "./components/Account/Account";
 import OwnerProperties from "./components/OwnerProperties/OwnerProperties";
 
 import {Flip, ToastContainer} from "react-toastify";
-import PropertyCard from './components/PropertyCard/PropertyCard';
+import InfoUpdate from './components/InfoUpdate/InfoUpdate';
 
 function App() {
 
@@ -90,8 +90,8 @@ function App() {
                     <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}></Route>
                     <Route path="/account" element={<PrivateRoute><Account/></PrivateRoute>}></Route>
                     <Route path="/properties" element={<PrivateRoute><OwnerProperties/></PrivateRoute>}></Route>
-                    <Route path="/intrusions" element={<PrivateRoute><OwnerIntrusions/></PrivateRoute>}></Route>
                     <Route path="*" element={<PrivateRoute><Home/></PrivateRoute>}></Route>
+                    <Route path="/update" element={<PrivateRoute><InfoUpdate/></PrivateRoute>}></Route>
                 </Routes>
             </Router>
             {toastContainer}

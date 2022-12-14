@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import PropertyCard from './PropertyCard';
 
-const property = {"id": 1, "name": "Property 1", "address": "Address 1", "owner": "John",
-  "cameras": [{"id": 1}, {"id": 2}], "alarms": [{"id": 1}, {"id": 2}, {"id": 3}]};
+const property = {"id": 1, "name": "Property 1", "address": "Address 1", "owner": {"username": "John"},
+  "cameras": ["id-1", "id-2", "id-3"], "alarms": ["id-1", "id-2", "id-3"]};
 
 describe('<PropertyCard />', () => {
   test('it should mount', () => {
@@ -52,4 +52,15 @@ describe('<PropertyCard />', () => {
     expect(propertyCard).toBeInTheDocument();
     expect(propertyCard).toHaveTextContent(property.address);
   });
+
+  test('it should display property owner', () => {
+
+    render(<PropertyCard property={property}/>);
+
+    const propertyCard = screen.getByTestId('PropertyOwner');
+
+    expect(propertyCard).toBeInTheDocument();
+    expect(propertyCard).toHaveTextContent(property.owner.username);
+  });
+
 });

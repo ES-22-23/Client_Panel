@@ -2,7 +2,8 @@ import axios from "axios";
 import keycloak from "../Keycloak";
 
 // const apiAddress = process.env.REACT_APP_API_URL + "/api";
-const apiAddress = "http://smapi.scss.hgsoft.me/";
+// const apiAddress = "http://imapi.scss.hgsoft.me";
+const apiAddress = "http://localhost:8082";
 
 // Owner functions
 async function getOwners() {

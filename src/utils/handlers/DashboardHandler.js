@@ -1,0 +1,11 @@
+
+
+const minimizeChart = () => {
+
+
+
+}
+
+export {
+    minimizeChart
+}

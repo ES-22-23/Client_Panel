@@ -83,7 +83,7 @@ const PropertyCard = (props) => {
     );
 
     return (
-        <Card className="property-card p-5" data-testid="PropertyCard">
+        <div className="property-card p-5" data-testid="PropertyCard">
 
             <Row>
                 <HiHomeModern size={50} color="black"/>
@@ -104,7 +104,7 @@ const PropertyCard = (props) => {
                 </Col>
             </Row>
 
-        </Card>
+        </div>
     );
 }
 

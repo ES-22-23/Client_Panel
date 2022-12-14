@@ -1,0 +1,11 @@
+.top-navbar {
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.bottom-navbar {
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}

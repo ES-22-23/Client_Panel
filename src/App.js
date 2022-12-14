@@ -22,6 +22,7 @@ import Account from "./components/Account/Account";
 import OwnerProperties from "./components/OwnerProperties/OwnerProperties";
 
 import {Flip, ToastContainer} from "react-toastify";
+import Dashboard from "./pages/Dashboard";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
     if (!initialized) {
         return (
             <Container className="p-0 text-center align-items-center justify-content-center d-flex" style={{
-                backgroundImage: "url(/Background2.jpg)",
+                backgroundImage: "url(./images/Background2.jpg)",
                 backgroundSize: "cover",
                 minHeight: "100vh",
                 minWidth: "100vw"
@@ -80,7 +81,7 @@ function App() {
 
     return (
         <Container className="p-0" style={{
-            backgroundImage: "url(/Background2.jpg)",
+            backgroundColor: "rgb(250, 250, 250)",
             backgroundSize: "cover",
             minHeight: "100vh",
             maxWidth: "100vw"
@@ -88,7 +89,7 @@ function App() {
             <Router history={customHistory}>
                 <SecComNavbar keycloak={keycloak}/>
                 <Routes>
-                    <Route path="/" element={<PrivateRoute><Home/></PrivateRoute>}></Route>
+                    <Route path="/" element={<PrivateRoute><Dashboard/></PrivateRoute>}></Route>
                     <Route path="/account" element={<PrivateRoute><Account/></PrivateRoute>}></Route>
                     <Route path="/properties" element={<PrivateRoute><OwnerProperties/></PrivateRoute>}></Route>
                     <Route path="/intrusions" element={<PrivateRoute><Intrusions/></PrivateRoute>}></Route>

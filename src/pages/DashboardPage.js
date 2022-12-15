@@ -1,17 +1,17 @@
 import Container from "react-bootstrap/Container";
-import SquareCard from "../components/Dashboard/SquareCard/SquareCard";
+import SquareCard from "../components/SquareCard/SquareCard";
 import Row from "react-bootstrap/Row";
 import {Col} from "react-bootstrap";
-import ListCard from "../components/Dashboard/ListCard/ListCard";
-import OverviewElement from "../components/Dashboard/ListElements/OverviewElement/OverviewElement";
-import ChartCard from "../components/Dashboard/IntrusionsChart/ChartCard";
-import DescriptionElement from "../components/Dashboard/ListElements/DescriptionElement/DescriptionElement";
+import ListCard from "../components/ListCard/ListCard";
+import OverviewElement from "../components/ListElements/OverviewElement/OverviewElement";
+import ChartCard from "../components/ChartCard/ChartCard";
+import DescriptionElement from "../components/ListElements/DescriptionElement/DescriptionElement";
 import {useEffect, useState} from "react";
 import {getAlarms, getCameras, getProperties} from "../utils/ApiHandler";
 import {toast} from "react-toastify";
 import {propertiesToOverviewComponent} from "../services/PropertiesService";
 
-const Dashboard = () => {
+const DashboardPage = () => {
 
     const [properties, setProperties] = useState([]);
     const [cameras, setCameras] = useState([]);
@@ -84,4 +84,4 @@ const Dashboard = () => {
 
 }
 
-export default Dashboard;
+export default DashboardPage;

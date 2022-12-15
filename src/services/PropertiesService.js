@@ -1,4 +1,4 @@
-import OverviewElement from "../components/Dashboard/ListElements/OverviewElement/OverviewElement";
+import OverviewElement from "../components/ListElements/OverviewElement/OverviewElement";
 
 const propertiesToOverviewComponent = (properties, callback) => {
 

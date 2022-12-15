@@ -19,10 +19,10 @@ import PrivateRoute from "./helpers/PrivateRoute";
 import {useKeycloak} from "@react-keycloak/web";
 import {Spinner} from "react-bootstrap";
 import Account from "./components/Account/Account";
-import OwnerProperties from "./components/OwnerProperties/OwnerProperties";
+import PropertiesPage from "./pages/PropertiesPage";
 
 import {Flip, ToastContainer} from "react-toastify";
-import Dashboard from "./pages/Dashboard";
+import DashboardPage from "./pages/DashboardPage";
 
 
 function App() {
@@ -89,9 +89,9 @@ function App() {
             <Router history={customHistory}>
                 <SecComNavbar keycloak={keycloak}/>
                 <Routes>
-                    <Route path="/" element={<PrivateRoute><Dashboard/></PrivateRoute>}></Route>
+                    <Route path="/" element={<PrivateRoute><DashboardPage/></PrivateRoute>}></Route>
                     <Route path="/account" element={<PrivateRoute><Account/></PrivateRoute>}></Route>
-                    <Route path="/properties" element={<PrivateRoute><OwnerProperties/></PrivateRoute>}></Route>
+                    <Route path="/properties" element={<PrivateRoute><PropertiesPage/></PrivateRoute>}></Route>
                     <Route path="/intrusions" element={<PrivateRoute><Intrusions/></PrivateRoute>}></Route>
                     <Route path="*" element={<PrivateRoute><Home/></PrivateRoute>}></Route>
                 </Routes>

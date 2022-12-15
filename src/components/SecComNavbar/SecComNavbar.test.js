@@ -80,7 +80,7 @@ describe('<SecComNavbar />', () => {
     });
     test('navbar should have the account link', () => {
         render(<ReactKeycloakProvider authClient={keycloak}><SecComNavbar/></ReactKeycloakProvider>);
-        const link = screen.getByText("Account");
+        const link = screen.getByText("AccountPage");
         expect(link).toBeInTheDocument();
         expect(link).toHaveAttribute("href", "/account");
     });

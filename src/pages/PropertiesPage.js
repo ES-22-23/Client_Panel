@@ -45,8 +45,11 @@ const PropertiesPage = () => {
     }
 
     return (
-        <Container className="text-center justify-content-center d-flex py-5" data-testid="OwnerProperties">
-            <Row className="w-100">
+        <Container data-testid="OwnerProperties" fluid>
+            <Row className="mx-5 mt-3">
+                <h2 className="mt-4 mb-0 fw-light fs-3">My Account</h2>
+            </Row>
+            <Row className="mx-5 mt-3">
                 <SearchBar handleSearch={handleSearch.bind(this)} addNew="/new/properties"/>
                 <Row className="justify-content-start d-flex">
                     {propertiesPanels}

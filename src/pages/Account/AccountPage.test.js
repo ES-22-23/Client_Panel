@@ -1,13 +1,13 @@
 import React from 'react';
 // import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-// import Account from './Account';
+// import AccountPage from './AccountPage';
 
 // import keycloak from "../../Keycloak";
 // import {ReactKeycloakProvider, useKeycloak} from "@react-keycloak/web";
 
 
-describe('<Account />', () => {
+describe('<AccountPage />', () => {
   test('it should mount', () => {
 
     let mockInitialized = true;
@@ -24,9 +24,9 @@ describe('<Account />', () => {
       };
     });
 
-    // render(<ReactKeycloakProvider authClient={keycloak}><Account /></ReactKeycloakProvider>);
+    // render(<ReactKeycloakProvider authClient={keycloak}><AccountPage /></ReactKeycloakProvider>);
     
-    // const account = screen.getByTestId('Account');
+    // const account = screen.getByTestId('AccountPage');
     // expect(account).toBeInTheDocument();
   });
 });

@@ -33,7 +33,6 @@ const PropertiesPage = () => {
     let propertiesPanels = [];
     for (let idx in filteredProperties) {
         const property = filteredProperties[idx]
-        console.log(property)
         propertiesPanels.push(
             <Col className="mb-4 col-12">
                 <PropertyCard property={property}/>

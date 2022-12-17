@@ -46,7 +46,7 @@ const InfoUpdate = () => {
     };
     const options = {title: "Properties", description: "View his properties", link: "/properties", icon: "BsFillHouseDoorFill"};
     return (
-        <Container className="text-center justify-content-center d-flex py-5" data-testid="Account">
+        <Container className="text-center justify-content-center d-flex py-5" data-testid="AccountPage">
             <Row className="justify-content-center align-items-center d-flex mt-4 w-75" style={{maxWidth: "600px"}}>
                 <Card className="p-5 text-white shadow" style={{border: "none", borderRadius: "20px", backgroundColor: "rgba(0,0,0,0.60)", textAlign: "start"}}>
                     <Row>

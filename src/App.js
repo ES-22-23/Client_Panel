@@ -18,7 +18,7 @@ import Intrusions from './components/Intrusions/Intrusions';
 import PrivateRoute from "./helpers/PrivateRoute";
 import {useKeycloak} from "@react-keycloak/web";
 import {Spinner} from "react-bootstrap";
-import Account from "./components/Account/Account";
+import AccountPage from "./pages/Account/AccountPage";
 import PropertiesPage from "./pages/PropertiesPage";
 
 import {Flip, ToastContainer} from "react-toastify";
@@ -90,7 +90,7 @@ function App() {
                 <SecComNavbar keycloak={keycloak}/>
                 <Routes>
                     <Route path="/" element={<PrivateRoute><DashboardPage/></PrivateRoute>}></Route>
-                    <Route path="/account" element={<PrivateRoute><Account/></PrivateRoute>}></Route>
+                    <Route path="/account" element={<PrivateRoute><AccountPage/></PrivateRoute>}></Route>
                     <Route path="/properties" element={<PrivateRoute><PropertiesPage/></PrivateRoute>}></Route>
                     <Route path="/intrusions" element={<PrivateRoute><Intrusions/></PrivateRoute>}></Route>
                     <Route path="*" element={<PrivateRoute><Home/></PrivateRoute>}></Route>

@@ -22,12 +22,13 @@ const intrusionsToOverviewComponent = (intrusions, callback) => {
 const intrusionsToChartData = (intrusions) => {
 
     let intrusionsChartData = [];
+
     const intrusionsDataByDate = new Map();
 
     for (let intrusionIdx in intrusions) {
 
         let intrusion = intrusions[intrusionIdx];
-        let intrusionDate = new Date(Number(Date.parse(intrusion.timestamp))).toLocaleDateString();
+        let intrusionDate = new Date(Number(Date.parse(intrusion.timestamp))).toDateString();
 
         if (intrusionsDataByDate.has(intrusionDate)) {
             intrusionsDataByDate.set(intrusionDate, intrusionsDataByDate.get(intrusionDate)+1);
@@ -41,7 +42,7 @@ const intrusionsToChartData = (intrusions) => {
         intrusionsChartData.push({id: key, date: key, intrusions: value})
     }
 
-    // console.log(intrusionsDataByDate);
+    intrusionsChartData = intrusionsChartData.sort((a,b) => new Date(a.date)-new Date(b.date));
 
     return intrusionsChartData;
 

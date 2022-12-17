@@ -1,47 +1,36 @@
 import './IntrusionCard.css';
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import Row from "react-bootstrap/Row";
-import {Button, Card, Col} from "react-bootstrap";
-import {getVideoFile} from "../../utils/SitesManagementApiHandler";
+import {Button} from "react-bootstrap";
 import {toast} from "react-toastify";
 import {GiSecurityGate} from "react-icons/gi";
 import DropdownCardItem from "../DropdownCardItem/DropdownCardItem";
+import {getIntrusionVideoUrl} from "../../utils/IntrusionApiHandler";
 
 const IntrusionCard = (props) => {
 
-    const [intrusion, setIntrusion] = React.useState(props.intrusion);
+    const [intrusion, setIntrusion] = useState(props.intrusion);
 
     useEffect(() => {
         setIntrusion(props.intrusion);
     }, [props.intrusion]);
 
     const handleDownload = () => {
-        getVideoFile(intrusion.key).then(response => {
 
-            const contentType = response.headers['Content-type'];
-            const filename =  response.headers.get('Content-Disposition').split('attachment; filename=')[1];
+        getIntrusionVideoUrl(intrusion.id)
+            .then(r => window.open(r.data))
+            .catch(() => toast.error("Unable to obtain URL for video."));
 
-            // Binary Large Object (BLOB) is a collection of binary data stored as a single entity.
-            const blob = new Blob([response.data], {type: contentType});
-
-            // We create an object URL for the incoming Blob and tell the browser to download the image with a hidden <a> HTML element.
-            const link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.download = filename;
-            link.click();
-
-            toast.success("Download completed!");
-
-        }).catch(error => {
-            console.log(error);
-            toast.error("Error downloading video.");
-        });
     }
 
     const handleSelection = () => {
-        props.handleSelection(intrusion);
+
+        getIntrusionVideoUrl(intrusion.id)
+            .then(r => window.open(r.data))
+            .catch(() => toast.error("Unable to obtain URL for video."));
+
     }
 
     const intrusionDetailsInfo = (
@@ -74,8 +63,8 @@ const IntrusionCard = (props) => {
                     <DropdownCardItem title={"Details"} info={intrusionDetailsInfo} />
                 </Row>
                 <Row className="d-flex justify-content-center mt-3">
-                    <Button variant="outline-primary" className="w-75 py-2 m-2" onClick={handleSelection}>View Video</Button>
-                    <Button variant="dark" className="w-75 py-2 m-2 mb-0" onClick={handleDownload}>Download Video</Button>
+                    <Button variant="outline-primary" className="w-75 py-2 m-2" onClick={() => handleSelection()}>View Video</Button>
+                    <Button variant="dark" className="w-75 py-2 m-2 mb-0" onClick={() => handleDownload()}>Download Video</Button>
                 </Row>
             </Row>
         </div>

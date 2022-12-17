@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 //import './VideoModal.css';
 import {Modal, Spinner} from "react-bootstrap";
 import {FaRegEye} from "react-icons/fa";
-import {getVideoFile} from "../../utils/ApiHandler";
+import {getVideoFile} from "../../utils/SitesManagementApiHandler";
 import {toast} from "react-toastify";
 import Row from "react-bootstrap/Row";
 

@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import {useKeycloak} from "@react-keycloak/web";
 import {Col} from "react-bootstrap";
 import AccountInfo from "../../components/AccountInfo/AccountInfo";
-import {getAlarms, getCameras, getProperties} from "../../utils/ApiHandler";
+import {getAlarms, getCameras, getProperties} from "../../utils/SitesManagementApiHandler";
 import {toast} from "react-toastify";
 import AccountOverview from "../../components/AccountOverview/AccountOverview";
 

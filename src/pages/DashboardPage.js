@@ -7,7 +7,7 @@ import OverviewElement from "../components/ListElements/OverviewElement/Overview
 import ChartCard from "../components/ChartCard/ChartCard";
 import DescriptionElement from "../components/ListElements/DescriptionElement/DescriptionElement";
 import {useEffect, useState} from "react";
-import {getAlarms, getCameras, getProperties} from "../utils/ApiHandler";
+import {getAlarms, getCameras, getProperties} from "../utils/SitesManagementApiHandler";
 import {toast} from "react-toastify";
 import {propertiesToOverviewComponent} from "../services/PropertiesService";
 

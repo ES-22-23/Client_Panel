@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import {Col} from "react-bootstrap";
 import PropertyCard from "../components/PropertyCard/PropertyCard";
 import SearchBar from "../components/SearchBar/SearchBar";
-import {getProperties} from "../utils/ApiHandler";
+import {getProperties} from "../utils/SitesManagementApiHandler";
 import {toast} from "react-toastify";
 
 const PropertiesPage = () => {

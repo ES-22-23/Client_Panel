@@ -56,11 +56,8 @@ const DashboardPage = () => {
 
         setDetailedInfo(detailsInfo);
         setShouldOpen(true);
-        detailsComponent = <ListCard title={"Details"} childs={<DescriptionElement descriptionElement={detailedInfo}/>} open={detailsInfo !== undefined} />;
-        setShouldOpen(true);
-        setDetailedInfo(detailsInfo);
 
-        toast("Details Selected");
+        detailsComponent = <ListCard title={"Details"} childs={<DescriptionElement descriptionElement={detailedInfo}/>} open={detailsInfo !== undefined} />;
 
     };
 

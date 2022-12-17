@@ -9,11 +9,11 @@ import {toast} from "react-toastify";
 
 
 import Form from 'react-bootstrap/Form';
-import { getOwner, updateOwner } from '../../utils/ApiHandler';
+import { getOwner, updateOwner } from '../../utils/SitesManagementApiHandler';
 
 const InfoUpdate = () => {
     const { keycloak, } = useKeycloak();
-    
+
     const [name, setName] = React.useState("");
     const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");
@@ -54,13 +54,13 @@ const InfoUpdate = () => {
                             <h2>Update Client Info</h2>
                             <Form.Group className="mb-3" controlId="formBasic">
                                 <Form.Label>New Name</Form.Label>
-                                <Form.Control   
-                                        type="text" 
-                                        placeholder="Enter username" 
+                                <Form.Control
+                                        type="text"
+                                        placeholder="Enter username"
                                         onChange={(e) => setName(e.target.value)}/>
-                               
+
                             </Form.Group>
-                          
+
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Email address</Form.Label>
                                 <Form.Control type="email" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)}/>

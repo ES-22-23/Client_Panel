@@ -20,11 +20,9 @@ const PropertyCard = (props) => {
         setProperty(props.property);
     }, [props.property]);
 
-    if (property === undefined) {
-        return <div data-testid="PropertyCard"></div>;
-    }
-
     useEffect(() => {
+
+        if (property == null) return;
 
         let cameras = [];
         let alarms = [];
@@ -65,6 +63,10 @@ const PropertyCard = (props) => {
         setAlarmsPanels(alarms);
 
     }, [property]);
+
+    if (property === undefined) {
+        return <div data-testid="PropertyCard"></div>;
+    }
 
     const propertyDetailsInfo = (
         <div>

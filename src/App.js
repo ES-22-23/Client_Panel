@@ -23,6 +23,7 @@ import PropertiesPage from "./pages/PropertiesPage";
 
 import {Flip, ToastContainer} from "react-toastify";
 import DashboardPage from "./pages/DashboardPage";
+import IntrusionsPage from "./pages/IntrusionsPage";
 
 
 function App() {
@@ -92,7 +93,7 @@ function App() {
                     <Route path="/" element={<PrivateRoute><DashboardPage/></PrivateRoute>}></Route>
                     <Route path="/account" element={<PrivateRoute><AccountPage/></PrivateRoute>}></Route>
                     <Route path="/properties" element={<PrivateRoute><PropertiesPage/></PrivateRoute>}></Route>
-                    <Route path="/intrusions" element={<PrivateRoute><Intrusions/></PrivateRoute>}></Route>
+                    <Route path="/intrusions" element={<PrivateRoute><IntrusionsPage/></PrivateRoute>}></Route>
                     <Route path="*" element={<PrivateRoute><Home/></PrivateRoute>}></Route>
                 </Routes>
             </Router>

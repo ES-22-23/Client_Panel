@@ -7,7 +7,7 @@ import {Col} from "react-bootstrap";
 import {RiAlarmWarningFill} from "react-icons/ri";
 import {BsCameraVideoFill} from "react-icons/bs";
 import {HiHomeModern} from "react-icons/hi2";
-import PropertyCardItem from "../PropertyCardItem/PropertyCardItem";
+import DropdownCardItem from "../DropdownCardItem/DropdownCardItem";
 
 const PropertyCard = (props) => {
 
@@ -20,11 +20,11 @@ const PropertyCard = (props) => {
         setProperty(props.property);
     }, [props.property]);
 
-    if (property === undefined) {
-        return <div data-testid="PropertyCard"></div>;
-    }
-
     useEffect(() => {
+
+        if (property === undefined) {
+            return;
+        }
 
         let cameras = [];
         let alarms = [];
@@ -66,6 +66,10 @@ const PropertyCard = (props) => {
 
     }, [property]);
 
+    if (property === undefined) {
+        return <div data-testid="PropertyCard"></div>;
+    }
+
     const propertyDetailsInfo = (
         <div>
             <Row className="my-3">
@@ -94,13 +98,13 @@ const PropertyCard = (props) => {
 
             <Row className="mt-3">
                 <Col>
-                    <PropertyCardItem title={"Details"} info={propertyDetailsInfo} startsOpen />
+                    <DropdownCardItem title={"Details"} info={propertyDetailsInfo} startsOpen />
                 </Col>
                 <Col>
-                    <PropertyCardItem title={"Cameras"} info={camerasPanels} />
+                    <DropdownCardItem title={"Cameras"} info={camerasPanels} />
                 </Col>
                 <Col>
-                    <PropertyCardItem title={"Alarms"} info={alarmsPanels} />
+                    <DropdownCardItem title={"Alarms"} info={alarmsPanels} />
                 </Col>
             </Row>
 

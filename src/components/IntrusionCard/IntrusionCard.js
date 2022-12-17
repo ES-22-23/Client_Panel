@@ -1,10 +1,13 @@
+import './IntrusionCard.css';
+
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-//import './IntrusionCard.css';
 import Row from "react-bootstrap/Row";
 import {Button, Card, Col} from "react-bootstrap";
-import {getVideoFile} from "../../utils/ApiHandler";
+import {getVideoFile} from "../../utils/SitesManagementApiHandler";
 import {toast} from "react-toastify";
+import {GiSecurityGate} from "react-icons/gi";
+import DropdownCardItem from "../DropdownCardItem/DropdownCardItem";
 
 const IntrusionCard = (props) => {
 
@@ -41,39 +44,41 @@ const IntrusionCard = (props) => {
         props.handleSelection(intrusion);
     }
 
-    return (
-        <Card className="p-5 text-white shadow"
-              style={{border: "none", borderRadius: "20px", backgroundColor: "rgba(0,0,0,0.60)", textAlign: "start"}}
-              data-testid="IntrusionCard">
-            <Row className="justify-content-center align-items-center d-flex my-0">
-                <Col>
-                    <Card className="p-4 mx-0" style={{borderRadius: "20px", backgroundColor: "rgba(0,0,0,0.60)"}}>
-                        <span className="m-0" style={{color: "rgb(255,196,0)", fontSize: "80%"}}>Property ID</span>
-                        <h6 className="m-0"
-                            style={{lineHeight: "1.2em", minHeight: "2.4em"}}>{intrusion.propertyID}</h6>
-                    </Card>
-                </Col>
-                <Col>
-                    <Card className="p-4 mx-0" style={{borderRadius: "20px", backgroundColor: "rgba(0,0,0,0.60)"}}>
-                        <span className="m-0" style={{color: "rgb(255,196,0)", fontSize: "80%"}}>Camera ID</span>
-                        <h6 className="m-0" style={{lineHeight: "1.2em", minHeight: "2.4em"}}>{intrusion.cameraID}</h6>
-                    </Card>
-                </Col>
-                <Col>
-                    <Card className="p-4 mx-0" style={{borderRadius: "20px", backgroundColor: "rgba(0,0,0,0.60)"}}>
-                        <span className="m-0" style={{color: "rgb(255,196,0)", fontSize: "80%"}}>Intrusion Date</span>
-                        <h6 className="m-0"
-                            style={{lineHeight: "1.2em", minHeight: "2.4em"}}>{intrusion.intrusionDate}</h6>
-                    </Card>
-                </Col>
-                <Col className="col-3">
-                    <Row className="justify-content-center d-flex">
-                        <Button variant="danger" className="w-75 py-2 m-2" onClick={handleSelection}>View Video</Button>
-                        <Button variant="dark" className="w-75 py-2 m-2" onClick={handleDownload}>Download Video</Button>
-                    </Row>
-                </Col>
+    const intrusionDetailsInfo = (
+        <div>
+            <Row className="my-3">
+                <small className="fw-normal text-muted">Property #{intrusion.propertyId}</small>
             </Row>
-        </Card>
+            <Row className="my-3">
+                <small className="fw-normal text-muted">Date</small>
+                <p className="fw-normal my-0">{new Date(Number(intrusion.timestamp)).toLocaleDateString("pt-PT")}</p>
+            </Row>
+            <Row className="my-3">
+                <small className="fw-normal text-muted">Camera</small>
+                <p className="fw-normal my-0">{intrusion.cameraId}</p>
+            </Row>
+            <Row className="my-3">
+                <small className="fw-normal text-muted">Id #{intrusion.id}</small>
+            </Row>
+        </div>
+    );
+
+    return (
+        <div className="intrusion-card p-5" data-testid="IntrusionCard">
+            <Row className="justify-content-center align-items-center d-flex my-0">
+                <Row className="d-flex align-content-center text-center">
+                    <GiSecurityGate size={50}/>
+                    <p className="fs-4 fw-bold mt-2">Intrusion #{intrusion.id}</p>
+                </Row>
+                <Row>
+                    <DropdownCardItem title={"Details"} info={intrusionDetailsInfo} />
+                </Row>
+                <Row className="d-flex justify-content-center mt-3">
+                    <Button variant="outline-primary" className="w-75 py-2 m-2" onClick={handleSelection}>View Video</Button>
+                    <Button variant="dark" className="w-75 py-2 m-2 mb-0" onClick={handleDownload}>Download Video</Button>
+                </Row>
+            </Row>
+        </div>
     );
 }
 

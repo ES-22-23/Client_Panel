@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 //import './Intrusions.css';
-import {getVideos} from "../../utils/ApiHandler";
+import {getVideos} from "../../utils/SitesManagementApiHandler";
 import Container from "react-bootstrap/Container";
 import IntrusionCard from "../IntrusionCard/IntrusionCard";
 import SearchBar from "../SearchBar/SearchBar";

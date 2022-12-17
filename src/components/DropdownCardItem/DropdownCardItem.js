@@ -2,7 +2,7 @@ import AccordionItem from "react-bootstrap/AccordionItem";
 import {Accordion} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 
-const PropertyCardItem = (props) => {
+const DropdownCardItem = (props) => {
 
     if (props.startsOpen) {
         return (
@@ -10,12 +10,12 @@ const PropertyCardItem = (props) => {
                 <AccordionItem eventKey={"0"}>
                     <Accordion.Header>
                         <div className="mx-2 fs-6 fw-light">
-                            {props.title}
+                            {props.title ? props.title : "Title Not Found"}
                         </div>
                     </Accordion.Header>
                     <Accordion.Body className="mx-0 p-0">
                         <Container className="my-3 mx-2">
-                            {props.info.length !== 0 ? props.info : "No available info"}
+                            {props.info && props.info.length !== 0 ? props.info : "No available info"}
                         </Container>
                     </Accordion.Body>
                 </AccordionItem>
@@ -27,12 +27,12 @@ const PropertyCardItem = (props) => {
                 <AccordionItem eventKey={"0"}>
                     <Accordion.Header>
                         <div className="mx-2 fs-6 fw-light">
-                            {props.title}
+                            {props.title ? props.title : "Title Not Found"}
                         </div>
                     </Accordion.Header>
                     <Accordion.Body className="mx-0 p-0">
                         <Container className="my-3 mx-2">
-                            {props.info.length !== 0 ? props.info : "No available info"}
+                            {props.info && props.info.length !== 0 ? props.info : "No available info"}
                         </Container>
                     </Accordion.Body>
                 </AccordionItem>
@@ -42,4 +42,4 @@ const PropertyCardItem = (props) => {
 
 };
 
-export default PropertyCardItem;
+export default DropdownCardItem;

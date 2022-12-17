@@ -9,6 +9,7 @@ import AccountInfo from "../../components/AccountInfo/AccountInfo";
 import {getAlarms, getCameras, getProperties} from "../../utils/SitesManagementApiHandler";
 import {toast} from "react-toastify";
 import AccountOverview from "../../components/AccountOverview/AccountOverview";
+import {getIntrusions} from "../../utils/IntrusionApiHandler";
 
 
 const AccountPage = () => {
@@ -33,6 +34,10 @@ const AccountPage = () => {
         getAlarms()
             .then(r => setAlarms(r.data))
             .catch(() => toast.error("Unable to load alarms data"));
+
+        getIntrusions()
+            .then(r => setIntrusions(r.data))
+            .catch(() => toast.error("Unable to load intrusions data"));
 
     }, []);
 

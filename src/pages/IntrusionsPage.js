@@ -10,18 +10,8 @@ import {toast} from "react-toastify";
 
 const IntrusionsPage = () => {
 
-    const mockIntrusions = [
-        {
-            id: 1,
-            propertyId: 2,
-            cameraId: "53529391-49be-4589-a760-3fa59dbba9a6",
-            timestamp: "1671277913079",
-            videoKey: "propId1/cam36e25c8c-165a-445a-b062-9b7a16195dd6/Video2022-11-21 20:46:12.66666.mp4"
-        }
-    ]
-
-    const [intrusions, setIntrusions] = useState(mockIntrusions);
-    const [filteredIntrusions, setFilteredIntrusions] = useState(mockIntrusions);
+    const [intrusions, setIntrusions] = useState([]);
+    const [filteredIntrusions, setFilteredIntrusions] = useState([]);
 
     useEffect(() => {
 
@@ -31,7 +21,6 @@ const IntrusionsPage = () => {
                 setFilteredIntrusions(r.data);
             })
             .catch(() => toast.error("Unable to obtain intrusions data."))
-            .finally(() => buildIntrusionsPanels())
 
     }, []);
 

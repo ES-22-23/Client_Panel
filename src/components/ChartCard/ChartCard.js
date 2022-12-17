@@ -6,21 +6,6 @@ import {Accordion} from "react-bootstrap";
 
 const ChartCard = (props) => {
 
-    const data = [
-        { id: 1, date: "05/16/2022", intrusions: 4456 },
-        { id: 2, date: "05/17/2022", intrusions: 2789 },
-        { id: 3, date: "05/18/2022", intrusions: 7891 },
-        { id: 4, date: "05/19/2022", intrusions: 4561 },
-        { id: 5, date: "05/20/2022", intrusions: 5561 },
-        { id: 6, date: "05/21/2022", intrusions: 6561 },
-        { id: 7, date: "05/22/2022", intrusions: 4561 },
-        { id: 8, date: "05/23/2022", intrusions: 4561 },
-        { id: 9, date: "05/24/2022", intrusions: 4861 },
-        { id: 10, date: "05/25/2022", intrusions: 8561 },
-        { id: 11, date: "05/26/2022", intrusions: 6561 },
-        { id: 12, date: "05/27/2022", intrusions: 4561 }
-    ];
-
     let accordionContent = (
         <AccordionItem eventKey={"0"}>
             <Accordion.Header>
@@ -35,7 +20,7 @@ const ChartCard = (props) => {
                         {props.description}
                     </small>
                     <ResponsiveContainer width="100%" height={260}>
-                        <AreaChart data={data}>
+                        <AreaChart data={props.data}>
                             <defs>
                                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
                                     <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>

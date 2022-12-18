@@ -29,8 +29,8 @@ const IntrusionsPage = () => {
 
             getIntrusionsFromProperty(property.id)
                 .then(r => {
-                    setIntrusions([...intrusions, r.data]);
-                    setFilteredIntrusions([...filteredIntrusions, r.data]);
+                    setIntrusions(r.data);
+                    setFilteredIntrusions(r.data);
                 })
                 .catch(() => toast.error(`Unable to obtain intrusions data for property ${property.id}`))
 
@@ -42,10 +42,9 @@ const IntrusionsPage = () => {
 
         let intrusionsPanels = [];
 
-        const filteredIntrusionsSorted = filteredIntrusions.sort((a,b) => new Date(b.date)-new Date(a.date));
+        const filteredIntrusionsSorted = filteredIntrusions.sort((a,b) => new Date(Number(Date.parse(b.timestamp)))-new Date(Number(Date.parse(a.timestamp))));
 
-        for (let idx in filteredIntrusionsSorted) {
-            const intrusion = filteredIntrusionsSorted[idx];
+        for (let intrusion of filteredIntrusionsSorted) {
             intrusionsPanels.push(
                 <Col className="my-2 col-3" key={intrusion.key}>
                     <IntrusionCard intrusion={intrusion}/>
@@ -75,8 +74,8 @@ const IntrusionsPage = () => {
             const dateParsed = new Date(queryDate[1]);
             setFilteredIntrusions(intrusions
                 .filter(intrusion => new Date(Number(Date.parse(intrusion.timestamp))).getDate() === dateParsed.getDate() &&
-                    new Date(Number(intrusion.timestamp)).getMonth() === dateParsed.getMonth() &&
-                    new Date(Number(intrusion.timestamp)).getFullYear() === dateParsed.getFullYear()));
+                    new Date(Number(Date.parse(intrusion.timestamp))).getMonth() === dateParsed.getMonth() &&
+                    new Date(Number(Date.parse(intrusion.timestamp))).getFullYear() === dateParsed.getFullYear()));
         } else {
             setFilteredIntrusions(intrusions.filter(intrusion => `Intrusion #${intrusion.id}`.toLowerCase().includes(query.toLowerCase())));
         }

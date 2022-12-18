@@ -40,7 +40,7 @@ const IntrusionCard = (props) => {
             </Row>
             <Row className="my-3">
                 <small className="fw-normal text-muted">Date</small>
-                <p className="fw-normal my-0">{new Date(Number(Date.parse(intrusion.timestamp))).toDateString()}</p>
+                <p className="fw-normal my-0">{new Date(Number(Date.parse(intrusion.timestamp))).toUTCString()}</p>
             </Row>
             <Row className="my-3">
                 <small className="fw-normal text-muted">Camera</small>

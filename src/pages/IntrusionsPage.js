@@ -48,7 +48,7 @@ const IntrusionsPage = () => {
             const intrusion = filteredIntrusionsSorted[idx];
             intrusionsPanels.push(
                 <Col className="my-2 col-3" key={intrusion.key}>
-                    <IntrusionCard intrusion={intrusion} handleSelection={() => {}}/>
+                    <IntrusionCard intrusion={intrusion}/>
                 </Col>
             );
         }

@@ -74,8 +74,6 @@ const IntrusionCard = (props) => {
 IntrusionCard.propTypes = {
     /** Intrusion details to be displayed on the card */
     intrusion: PropTypes.object,
-    /** Function to be called when the View Video button is clicked */
-    handleSelection: PropTypes.func
 };
 
 IntrusionCard.defaultProps = {
@@ -84,8 +82,7 @@ IntrusionCard.defaultProps = {
         propertyID: "",
         cameraID: "",
         intrusionDate: ""
-    },
-    handleSelection: () => {}
+    }
 };
 
 export default IntrusionCard;

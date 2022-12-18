@@ -6,10 +6,10 @@ import Row from "react-bootstrap/Row";
 import {useKeycloak} from "@react-keycloak/web";
 import {Col} from "react-bootstrap";
 import AccountInfo from "../../components/AccountInfo/AccountInfo";
-import {getAlarms, getCameras, getProperties} from "../../utils/SitesManagementApiHandler";
+import {getAlarm, getCamera, getProperties} from "../../utils/SitesManagementApiHandler";
 import {toast} from "react-toastify";
 import AccountOverview from "../../components/AccountOverview/AccountOverview";
-import {getIntrusions} from "../../utils/IntrusionApiHandler";
+import {getIntrusionsFromProperty} from "../../utils/IntrusionApiHandler";
 
 
 const AccountPage = () => {
@@ -25,21 +25,44 @@ const AccountPage = () => {
 
         getProperties()
             .then(r => setProperties(r.data))
-            .catch(() => toast.error("Unable to load properties data"));
-
-        getCameras()
-            .then(r => setCameras(r.data))
-            .catch(() => toast.error("Unable to load cameras data"));
-
-        getAlarms()
-            .then(r => setAlarms(r.data))
-            .catch(() => toast.error("Unable to load alarms data"));
-
-        getIntrusions()
-            .then(r => setIntrusions(r.data))
-            .catch(() => toast.error("Unable to load intrusions data"));
+            .catch(() => {
+                toast.error("Unable to get your properties.")
+            });
 
     }, []);
+
+    useEffect(() => {
+
+        if (!properties) return;
+
+        for (let property of properties) {
+
+            let alarmsIds = property.alarms;
+            let camerasIds = property.cameras;
+
+            alarmsIds.forEach(alarmId => {
+                getAlarm(alarmId)
+                    .then(r => setAlarms([...alarms, r.data]))
+                    .catch(() => {
+                        toast.error(`Unable to get data for alarm ${alarmId}`)
+                    });
+            });
+
+            camerasIds.forEach(cameraId => {
+                getCamera(cameraId)
+                    .then(r => setCameras([...cameras, r.data]))
+                    .catch(() => toast.error(`Unable to get data for camera ${cameraId}`))
+            });
+
+            getIntrusionsFromProperty(property.id)
+                .then(r => setIntrusions(r.data))
+                .catch(() => {
+                    toast.error(`Unable to get intrusions for property ${property.id}`)
+                });
+
+        }
+
+    }, [properties]);
 
     return (
         <div>

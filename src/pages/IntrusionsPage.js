@@ -27,8 +27,11 @@ const IntrusionsPage = () => {
     const buildIntrusionsPanels = () => {
 
         let intrusionsPanels = [];
-        for (let idx in filteredIntrusions) {
-            const intrusion = intrusions[idx];
+
+        const filteredIntrusionsSorted = filteredIntrusions.sort((a,b) => new Date(b.date)-new Date(a.date));
+
+        for (let idx in filteredIntrusionsSorted) {
+            const intrusion = filteredIntrusionsSorted[idx];
             intrusionsPanels.push(
                 <Col className="my-2 col-3" key={intrusion.key}>
                     <IntrusionCard intrusion={intrusion} handleSelection={() => {}}/>

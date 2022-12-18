@@ -3,6 +3,9 @@ import OverviewElement from "../components/ListElements/OverviewElement/Overview
 const intrusionsToOverviewComponent = (intrusions, callback) => {
 
     const listOfOverviewComponents = [];
+
+    intrusions = intrusions.sort((a,b) => new Date(b.date)-new Date(a.date));
+
     for (let intrusionIdx in intrusions) {
         let intrusion = intrusions[intrusionIdx];
         listOfOverviewComponents.push(<OverviewElement

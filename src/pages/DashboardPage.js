@@ -81,7 +81,7 @@ const DashboardPage = () => {
                 </Col>
                 <Col>
                     <ListCard title={"Properties"} childs={propertiesToOverviewComponent(properties, onDetailsSelected)} open/>
-                    <ListCard title={"Intrusions"} childs={intrusionsToOverviewComponent(intrusions, onDetailsSelected)} />
+                    <ListCard title={"Intrusions"} childs={intrusionsToOverviewComponent(intrusions.slice(0, 10), onDetailsSelected)} />
                 </Col>
             </Row>
         </Container>

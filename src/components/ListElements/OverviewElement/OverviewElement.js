@@ -25,7 +25,7 @@ const OverviewElement = (props) => {
                     <p className="m-0 p-0 fs-6 fw-normal align-self-center">{content.title}</p>
                 </Col>
                 <Col className="offset-2 col-3 d-flex justify-content-center">
-                    <Button variant="outline-danger" className="align-self-center" onClick={() => props.callback()}>
+                    <Button variant="outline-primary" className="align-self-center" onClick={() => props.callback()}>
                         {content.actionText}
                     </Button>
                 </Col>

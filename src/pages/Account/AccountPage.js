@@ -32,37 +32,47 @@ const AccountPage = () => {
     }, []);
 
     useEffect(() => {
+        updateOverviewInfo(properties);
+    }, [properties]);
 
-        if (!properties) return;
+    const updateOverviewInfo = (propertiesObtained) => {
 
-        for (let property of properties) {
+        const instantiatedPromises = [];
+        const obtainedAlarms = [], obtainedCameras = [], obtainedIntrusions = [];
+
+        if (!propertiesObtained) return;
+
+        for (let property of propertiesObtained) {
 
             let alarmsIds = property.alarms;
             let camerasIds = property.cameras;
 
             alarmsIds.forEach(alarmId => {
-                getAlarm(alarmId)
-                    .then(r => setAlarms([...alarms, r.data]))
-                    .catch(() => {
-                        toast.error(`Unable to get data for alarm ${alarmId}`)
-                    });
+                instantiatedPromises.push(getAlarm(alarmId)
+                    .then(r => obtainedAlarms.push(r.data))
+                    .catch(() => toast.error(`Unable to get data for alarm ${alarmId}`)));
             });
 
             camerasIds.forEach(cameraId => {
-                getCamera(cameraId)
-                    .then(r => setCameras([...cameras, r.data]))
-                    .catch(() => toast.error(`Unable to get data for camera ${cameraId}`))
+                instantiatedPromises.push(getCamera(cameraId)
+                    .then(r => obtainedCameras.push(r.data))
+                    .catch(() => toast.error(`Unable to get data for camera ${cameraId}`)));
             });
 
-            getIntrusionsFromProperty(property.id)
-                .then(r => setIntrusions(r.data))
-                .catch(() => {
-                    toast.error(`Unable to get intrusions for property ${property.id}`)
-                });
+            instantiatedPromises.push(getIntrusionsFromProperty(property.id)
+                .then(r => obtainedIntrusions.push.apply(obtainedIntrusions, r.data))
+                .catch(() => toast.error(`Unable to get intrusions for property ${property.id}`)));
 
         }
 
-    }, [properties]);
+        Promise.all(instantiatedPromises)
+            .then(() => {
+                setAlarms(obtainedAlarms);
+                setCameras(obtainedCameras);
+                setIntrusions(obtainedIntrusions);
+            });
+
+    };
 
     return (
         <div>

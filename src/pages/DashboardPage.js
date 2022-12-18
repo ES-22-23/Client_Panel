@@ -6,10 +6,10 @@ import ListCard from "../components/ListCard/ListCard";
 import ChartCard from "../components/ChartCard/ChartCard";
 import DescriptionElement from "../components/ListElements/DescriptionElement/DescriptionElement";
 import {useEffect, useState} from "react";
-import {getAlarms, getCameras, getProperties} from "../utils/SitesManagementApiHandler";
+import {getAlarm, getCamera, getProperties} from "../utils/SitesManagementApiHandler";
 import {toast} from "react-toastify";
 import {propertiesToOverviewComponent} from "../services/PropertiesService";
-import {getIntrusions} from "../utils/IntrusionApiHandler";
+import {getIntrusionsFromProperty} from "../utils/IntrusionApiHandler";
 import {intrusionsToChartData, intrusionsToOverviewComponent} from "../services/IntrusionsService";
 
 const DashboardPage = () => {
@@ -32,25 +32,40 @@ const DashboardPage = () => {
                 toast.error("Unable to get your properties.")
             });
 
-        getAlarms()
-            .then(r => setAlarms(r.data))
-            .catch(() => {
-                toast.error("Unable to get your alarms.")
-            });
-
-        getCameras()
-            .then(r => setCameras(r.data))
-            .catch(() => {
-                toast.error("Unable to get your cameras.")
-            });
-
-        getIntrusions()
-            .then(r => setIntrusions(r.data))
-            .catch(() => {
-                toast.error("Unable to get intrusions for your properties.")
-            });
-
     }, []);
+
+    useEffect(() => {
+
+        if (!properties) return;
+
+        for (let property of properties) {
+
+            let alarmsIds = property.alarms;
+            let camerasIds = property.cameras;
+
+            alarmsIds.forEach(alarmId => {
+                getAlarm(alarmId)
+                    .then(r => setAlarms([...alarms, r.data]))
+                    .catch(() => {
+                        toast.error("Unable to get data for alarm")
+                    });
+            });
+
+            camerasIds.forEach(cameraId => {
+               getCamera(cameraId)
+                   .then(r => setCameras([...cameras, r.data]))
+                   .catch(() => toast.error("Unable to get data for camera"))
+            });
+
+            getIntrusionsFromProperty(property.id)
+                .then(r => setIntrusions(r.data))
+                .catch(() => {
+                    toast.error("Unable to get intrusions for your properties.")
+                });
+
+        }
+
+    }, [properties]);
 
     const onDetailsSelected = (detailsInfo) => {
 

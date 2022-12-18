@@ -4,25 +4,39 @@ import SearchBar from "../components/SearchBar/SearchBar";
 import {useEffect, useState} from "react";
 import IntrusionCard from "../components/IntrusionCard/IntrusionCard";
 import {Col} from "react-bootstrap";
-import {getIntrusions} from "../utils/IntrusionApiHandler";
+import {getIntrusionsFromProperty} from "../utils/IntrusionApiHandler";
 import {toast} from "react-toastify";
+import {getProperties} from "../utils/SitesManagementApiHandler";
 
 
 const IntrusionsPage = () => {
 
+    const [properties, setProperties] = useState([]);
     const [intrusions, setIntrusions] = useState([]);
     const [filteredIntrusions, setFilteredIntrusions] = useState([]);
 
     useEffect(() => {
 
-        getIntrusions()
-            .then(r => {
-                setIntrusions(r.data);
-                setFilteredIntrusions(r.data);
-            })
-            .catch(() => toast.error("Unable to obtain intrusions data."))
+        getProperties()
+            .then(r => setProperties(r.data))
+            .catch(() => toast.error("Unable to get data for properties"));
 
     }, []);
+
+    useEffect(() => {
+
+        for (let property of properties) {
+
+            getIntrusionsFromProperty(property.id)
+                .then(r => {
+                    setIntrusions([...intrusions, r.data]);
+                    setFilteredIntrusions([...filteredIntrusions, r.data]);
+                })
+                .catch(() => toast.error(`Unable to obtain intrusions data for property ${property.id}`))
+
+        }
+
+    }, [properties]);
 
     const buildIntrusionsPanels = () => {
 

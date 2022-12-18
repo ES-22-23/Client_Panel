@@ -22,13 +22,64 @@ const DashboardPage = () => {
     const [detailedInfo, setDetailedInfo] = useState(undefined);
     const [shouldOpen, setShouldOpen] = useState(false);
 
-    let detailsComponent = <ListCard title={"Details"} childs={<DescriptionElement descriptionElement={detailedInfo}/>} open />;
+    let detailsComponent = <ListCard title={"Details"} childs={<DescriptionElement descriptionElement={detailedInfo}/>}
+                                     open/>;
 
     useEffect(() => {
 
         getProperties()
             .then(r => setProperties(r.data))
             .catch(() => toast.error("Unable to get your properties."));
+
+        // Setup Scheduler to update Dashboard data every 10 seconds
+        setInterval(() => {
+
+            getProperties()
+                .then(r => {
+
+                    let propertiesObtained = r.data;
+                    const instantiatedPromises = [];
+                    const obtainedAlarms = [], obtainedCameras = [], obtainedIntrusions = [];
+
+                    if (!propertiesObtained) return;
+
+                    setLoadingSpinner(true);
+
+                    for (let property of propertiesObtained) {
+
+                        let alarmsIds = property.alarms;
+                        let camerasIds = property.cameras;
+
+                        alarmsIds.forEach(alarmId => {
+                            instantiatedPromises.push(getAlarm(alarmId)
+                                .then(r => obtainedAlarms.push(r.data))
+                                .catch(() => toast.error(`Unable to get data for alarm ${alarmId}`)));
+                        });
+
+                        camerasIds.forEach(cameraId => {
+                            instantiatedPromises.push(getCamera(cameraId)
+                                .then(r => obtainedCameras.push(r.data))
+                                .catch(() => toast.error(`Unable to get data for camera ${cameraId}`)));
+                        });
+
+                        instantiatedPromises.push(getIntrusionsFromProperty(property.id)
+                            .then(r => obtainedIntrusions.push.apply(obtainedIntrusions, r.data))
+                            .catch(() => toast.error(`Unable to get intrusions for property ${property.id}`)));
+
+                    }
+
+                    Promise.all(instantiatedPromises)
+                        .then(() => {
+                            setAlarms(obtainedAlarms);
+                            setCameras(obtainedCameras);
+                            setIntrusions(obtainedIntrusions);
+                            setLoadingSpinner(false);
+                        });
+
+                })
+                .catch(() => toast.error("Error updating dashboard data."));
+
+        }, 10000);
 
     }, []);
 
@@ -48,9 +99,9 @@ const DashboardPage = () => {
             });
 
             camerasIds.forEach(cameraId => {
-               getCamera(cameraId)
-                   .then(r => setCameras([...cameras, r.data]))
-                   .catch(() => toast.error(`Unable to get data for camera ${cameraId}`));
+                getCamera(cameraId)
+                    .then(r => setCameras([...cameras, r.data]))
+                    .catch(() => toast.error(`Unable to get data for camera ${cameraId}`));
             });
 
             getIntrusionsFromProperty(property.id)
@@ -66,9 +117,23 @@ const DashboardPage = () => {
         setDetailedInfo(detailsInfo);
         setShouldOpen(true);
 
-        detailsComponent = <ListCard title={"Details"} childs={<DescriptionElement descriptionElement={detailedInfo}/>} open={detailsInfo !== undefined} />;
+        detailsComponent = <ListCard title={"Details"} childs={<DescriptionElement descriptionElement={detailedInfo}/>}
+                                     open={detailsInfo !== undefined}/>;
 
     };
+
+    const setLoadingSpinner = (status) => {
+        let loadingSpinner = document.getElementById("reloading-data-spinner");
+
+        if (!loadingSpinner) return;
+
+        if (status) {
+           loadingSpinner.visibility = 'visible';
+        } else {
+            loadingSpinner.visibility = 'hidden';
+        }
+
+    }
 
     return (
         <Container fluid>
@@ -81,16 +146,22 @@ const DashboardPage = () => {
                     <SquareCard title={"Cameras"} value={cameras.length}/>
                     <SquareCard title={"Alarms"} value={alarms.length}/>
                     <SquareCard title={"Intrusions"} value={intrusions.length}/>
+                    <div id="reloading-data-spinner" className="spinner-grow align-self-center" role="status" hidden></div>
                 </div>
             </Row>
             <Row className="mx-5 mt-4">
                 <Col className="col-7">
-                    <ChartCard title={"Intrusions Evolution"} description={"Check the number of intrusions registered in the last week."} data={intrusionsToChartData(intrusions)} open/>
-                    <ListCard title={"Details"} childs={<DescriptionElement descriptionElement={detailedInfo}/>} open={shouldOpen} />
+                    <ChartCard title={"Intrusions Evolution"}
+                               description={"Check the number of intrusions registered in the last week."}
+                               data={intrusionsToChartData(intrusions)} open/>
+                    <ListCard title={"Details"} childs={<DescriptionElement descriptionElement={detailedInfo}/>}
+                              open={shouldOpen}/>
                 </Col>
                 <Col>
-                    <ListCard title={"Properties"} childs={propertiesToOverviewComponent(properties, onDetailsSelected)} open/>
-                    <ListCard title={"Intrusions"} childs={intrusionsToOverviewComponent(intrusions.slice(0, 10), onDetailsSelected)} />
+                    <ListCard title={"Properties"} childs={propertiesToOverviewComponent(properties, onDetailsSelected)}
+                              open/>
+                    <ListCard title={"Intrusions"}
+                              childs={intrusionsToOverviewComponent(intrusions.slice(0, 10), onDetailsSelected)}/>
                 </Col>
             </Row>
         </Container>

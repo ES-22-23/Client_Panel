@@ -5,10 +5,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import {Button, Card, Col} from "react-bootstrap";
 
-import SecComCarousel from "../SecComCarousel/SecComCarousel";
 import {useKeycloak} from "@react-keycloak/web";
 import DropdownCardItem from "../DropdownCardItem/DropdownCardItem";
-import {BsCameraVideoFill} from "react-icons/bs";
 
 const Authentication = () => {
 

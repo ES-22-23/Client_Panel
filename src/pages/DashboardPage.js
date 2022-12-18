@@ -28,9 +28,7 @@ const DashboardPage = () => {
 
         getProperties()
             .then(r => setProperties(r.data))
-            .catch(() => {
-                toast.error("Unable to get your properties.")
-            });
+            .catch(() => toast.error("Unable to get your properties."));
 
     }, []);
 
@@ -46,22 +44,18 @@ const DashboardPage = () => {
             alarmsIds.forEach(alarmId => {
                 getAlarm(alarmId)
                     .then(r => setAlarms([...alarms, r.data]))
-                    .catch(() => {
-                        toast.error("Unable to get data for alarm")
-                    });
+                    .catch(() => toast.error(`Unable to get data for alarm ${alarmId}`));
             });
 
             camerasIds.forEach(cameraId => {
                getCamera(cameraId)
                    .then(r => setCameras([...cameras, r.data]))
-                   .catch(() => toast.error("Unable to get data for camera"))
+                   .catch(() => toast.error(`Unable to get data for camera ${cameraId}`));
             });
 
             getIntrusionsFromProperty(property.id)
                 .then(r => setIntrusions(r.data))
-                .catch(() => {
-                    toast.error("Unable to get intrusions for your properties.")
-                });
+                .catch(() => toast.error(`Unable to get intrusions for property ${property.id}`));
 
         }
 

@@ -11,9 +11,7 @@ import {createBrowserHistory} from "history";
 import Container from "react-bootstrap/Container";
 
 import SecComNavbar from "./components/SecComNavbar/SecComNavbar";
-import Home from "./components/Home/Home";
 import Authentication from "./components/Authentication/Authentication";
-import Intrusions from './components/Intrusions/Intrusions';
 
 import PrivateRoute from "./helpers/PrivateRoute";
 import {useKeycloak} from "@react-keycloak/web";
@@ -94,7 +92,7 @@ function App() {
                     <Route path="/account" element={<PrivateRoute><AccountPage/></PrivateRoute>}></Route>
                     <Route path="/properties" element={<PrivateRoute><PropertiesPage/></PrivateRoute>}></Route>
                     <Route path="/intrusions" element={<PrivateRoute><IntrusionsPage/></PrivateRoute>}></Route>
-                    <Route path="*" element={<PrivateRoute><Home/></PrivateRoute>}></Route>
+                    <Route path="*" element={<PrivateRoute><DashboardPage/></PrivateRoute>}></Route>
                 </Routes>
             </Router>
             {toastContainer}

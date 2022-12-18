@@ -23,8 +23,8 @@ const SecComNavbar = () => {
 
     if (initialized && !keycloak.authenticated) {
         return (
-            <Navbar className="justify-content-center" style={{backgroundColor: "rgba(0,0,0,0.60)"}} expand="lg">
-                <Navbar.Brand href="/" className="p-3 text-white" data-testid="SecComLogo">
+            <Navbar className="justify-content-center top-navbar" variant="light" expand="lg">
+                <Navbar.Brand href="/" className="p-3" data-testid="SecComLogo">
                     <BsFillCameraVideoFill color="#DC3545"/> SecCom
                 </Navbar.Brand>
             </Navbar>
@@ -39,7 +39,7 @@ const SecComNavbar = () => {
                         <BsFillCameraVideoFill color="#DC3545"/> SecCom
                     </Navbar.Brand>
                     <Col className="justify-content-end d-flex">
-                        <Button variant="outline-danger" className="px-3" onClick={() => keycloak.logout()}>Logout {keycloak.tokenParsed.preferred_username}</Button>
+                        <Button variant="outline-primary" className="px-3" onClick={() => keycloak.logout()}>Logout {keycloak.tokenParsed.preferred_username}</Button>
                     </Col>
                 </Container>
 

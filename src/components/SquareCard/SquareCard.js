@@ -24,7 +24,7 @@ const SquareCard = (props) => {
                     <p className="fs-6 fw-normal p-0 m-0">{props.title}</p>
                 </div>
                 {(props.showProgress || props.showProgress === undefined) && <div className="progress progress-sm mt-2" style={{width: "90px", height: "5px"}}>
-                    <div className="progress-bar bg-green" style={{width: "84%"}}></div>
+                    <div className="progress-bar bg-green" style={{width: "100%"}}></div>
                 </div>}
             </div>
         </div>

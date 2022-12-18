@@ -56,11 +56,8 @@ const DashboardPage = () => {
 
         setDetailedInfo(detailsInfo);
         setShouldOpen(true);
-        detailsComponent = <ListCard title={"Details"} childs={<DescriptionElement descriptionElement={detailedInfo}/>} open={detailsInfo !== undefined} />;
-        setShouldOpen(true);
-        setDetailedInfo(detailsInfo);
 
-        toast("Details Selected");
+        detailsComponent = <ListCard title={"Details"} childs={<DescriptionElement descriptionElement={detailedInfo}/>} open={detailsInfo !== undefined} />;
 
     };
 
@@ -84,7 +81,7 @@ const DashboardPage = () => {
                 </Col>
                 <Col>
                     <ListCard title={"Properties"} childs={propertiesToOverviewComponent(properties, onDetailsSelected)} open/>
-                    <ListCard title={"Intrusions"} childs={intrusionsToOverviewComponent(intrusions, onDetailsSelected)} />
+                    <ListCard title={"Intrusions"} childs={intrusionsToOverviewComponent(intrusions.slice(0, 10), onDetailsSelected)} />
                 </Col>
             </Row>
         </Container>

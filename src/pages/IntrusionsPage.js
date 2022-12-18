@@ -27,9 +27,11 @@ const IntrusionsPage = () => {
     const buildIntrusionsPanels = () => {
 
         let intrusionsPanels = [];
-        for (let idx in filteredIntrusions) {
-            const intrusion = intrusions[idx];
-            console.log(new Date(Number(intrusion.timestamp)).getDate())
+
+        const filteredIntrusionsSorted = filteredIntrusions.sort((a,b) => new Date(b.date)-new Date(a.date));
+
+        for (let idx in filteredIntrusionsSorted) {
+            const intrusion = filteredIntrusionsSorted[idx];
             intrusionsPanels.push(
                 <Col className="my-2 col-3" key={intrusion.key}>
                     <IntrusionCard intrusion={intrusion} handleSelection={() => {}}/>
@@ -58,7 +60,7 @@ const IntrusionsPage = () => {
             const queryDate = query.split(':');
             const dateParsed = new Date(queryDate[1]);
             setFilteredIntrusions(intrusions
-                .filter(intrusion => new Date(Number(intrusion.timestamp)).getDate() === dateParsed.getDate() &&
+                .filter(intrusion => new Date(Number(Date.parse(intrusion.timestamp))).getDate() === dateParsed.getDate() &&
                     new Date(Number(intrusion.timestamp)).getMonth() === dateParsed.getMonth() &&
                     new Date(Number(intrusion.timestamp)).getFullYear() === dateParsed.getFullYear()));
         } else {

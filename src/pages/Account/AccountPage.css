@@ -1,0 +1,14 @@
+.account-card {
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(255,255,255);
+    text-align: start;
+    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    height: 60vh;
+}
+
+.profile-picture {
+    border-radius: 8vw;
+    height: 8vw;
+    width: 8vw;
+}
